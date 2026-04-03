@@ -12,6 +12,7 @@ out/
 
 # OS
 .DS_Store
+!public/.gitkeep
 
 # TypeScript
 tsconfig.tsbuildinfo
