@@ -35,6 +35,10 @@ export function RegTagInput({ value, onChange, maxTags = 10 }: RegTagInputProps)
     }
   }
 
+  function handleBlur() {
+    if (draft.trim()) addTags(draft);
+  }
+
   function handlePaste(e: React.ClipboardEvent<HTMLInputElement>) {
     const text = e.clipboardData.getData("text");
     if (/[\n,]/.test(text)) {
@@ -84,6 +88,7 @@ export function RegTagInput({ value, onChange, maxTags = 10 }: RegTagInputProps)
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
           onPaste={handlePaste}
           disabled={atMax}
           placeholder={atMax ? "Maximum reached" : "e.g. AB12CDE"}

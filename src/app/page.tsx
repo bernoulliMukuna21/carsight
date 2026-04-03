@@ -80,27 +80,18 @@ export default function HomePage() {
 
   return (
     <div className="space-y-12">
-      {/* Hero */}
-      <div className="flex flex-col lg:flex-row items-center gap-10 pt-4">
-        <div className="flex-1 space-y-4 text-center lg:text-left">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            Which car on your shortlist should you buy?
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            You&apos;ve saved a shortlist of cars. Paste their reg numbers and
-            we&apos;ll rank them by MOT risk — so you know which one to go and
-            view first, and which ones to skip.
-          </p>
-        </div>
-        <div className="flex-shrink-0 w-full lg:w-80">
-          <CarIllustration />
-        </div>
+      {/* Hero headline */}
+      <div className="pt-4 space-y-3 text-center lg:text-left">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+          Which car on your shortlist should you buy?
+        </h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300">
+          Paste their reg numbers and we&apos;ll rank them by MOT risk — so you
+          know which one to view first, and which ones to skip.
+        </p>
       </div>
 
-      {/* Mock preview */}
-      <MockComparisonPreview />
-
-      {/* Lookup form */}
+      {/* Lookup form — shown early so it's visible on mobile without scrolling */}
       <form
         onSubmit={handleSubmit}
         className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 p-6 space-y-4"
@@ -128,6 +119,16 @@ export default function HomePage() {
           {loading ? "Ranking…" : "Rank my shortlist"}
         </button>
       </form>
+
+      {/* Car illustration + mock preview */}
+      <div className="flex flex-col lg:flex-row items-center gap-10">
+        <div className="flex-shrink-0 w-full lg:w-80">
+          <CarIllustration />
+        </div>
+        <div className="flex-1 w-full">
+          <MockComparisonPreview />
+        </div>
+      </div>
 
       {/* Example shortcuts */}
       <div className="space-y-3">
