@@ -9,6 +9,7 @@ import { ScoreBreakdownBars } from "@/components/ScoreBreakdownBars";
 import { CautionFlagList } from "@/components/CautionFlagList";
 import { IssueList } from "@/components/IssueList";
 import { AiExplanationCard } from "@/components/AiExplanationCard";
+import { FeedbackBar } from "@/components/FeedbackBar";
 
 export default function ReportPage() {
   const params = useParams();
@@ -188,6 +189,8 @@ export default function ReportPage() {
           ))}
         </div>
       </section>
+
+      <FeedbackBar />
 
       {/* Disclaimer */}
       <div className="rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 px-5 py-4 text-xs text-gray-500 dark:text-gray-400">

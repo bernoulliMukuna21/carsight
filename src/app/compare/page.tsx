@@ -8,6 +8,7 @@ import { ScoreBadge } from "@/components/ScoreBadge";
 import { CautionFlagList } from "@/components/CautionFlagList";
 import { AiExplanationCard } from "@/components/AiExplanationCard";
 import { IssueList } from "@/components/IssueList";
+import { FeedbackBar } from "@/components/FeedbackBar";
 
 const STATUS_STYLES: Record<RecommendationStatus, string> = {
   RECOMMENDED:
@@ -152,6 +153,8 @@ export default function ComparePage() {
           />
         ))}
       </div>
+
+      <FeedbackBar />
 
       {/* Disclaimer */}
       <div className="rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 px-5 py-4 text-xs text-gray-500 dark:text-gray-400">
