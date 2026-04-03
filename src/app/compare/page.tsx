@@ -181,18 +181,21 @@ function VehicleCard({
 }) {
   if (vehicle.error) {
     return (
-      <div className="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-4 flex items-center gap-4 opacity-60">
-        <span className="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-700 text-gray-500 text-xs font-bold flex items-center justify-center shrink-0">
-          {rank}
+      <div className="rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-800/50 px-5 py-4 flex items-center gap-4">
+        <span className="w-7 h-7 rounded-full bg-gray-300 dark:bg-slate-600 text-gray-400 dark:text-gray-500 text-xs font-bold flex items-center justify-center shrink-0">
+          —
         </span>
         <div className="flex-1">
-          <p className="font-mono font-bold text-gray-900 dark:text-white">
+          <p className="font-mono font-bold text-gray-400 dark:text-gray-500">
             {vehicle.registration}
           </p>
-          <p className="text-sm text-red-500 dark:text-red-400">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             {vehicle.error}
           </p>
         </div>
+        <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-slate-700 px-2 py-0.5 rounded-full shrink-0">
+          Not ranked
+        </span>
       </div>
     );
   }
