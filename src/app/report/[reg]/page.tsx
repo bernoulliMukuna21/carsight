@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import type { VehicleReport } from "@/core/domain/types";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { ScoreBreakdownBars } from "@/components/ScoreBreakdownBars";
@@ -12,12 +13,15 @@ import { AiExplanationCard } from "@/components/AiExplanationCard";
 export default function ReportPage() {
   const params = useParams();
   const router = useRouter();
+  const posthog = usePostHog();
   const reg = String(params.reg).toUpperCase();
   const [report, setReport] = useState<VehicleReport | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    posthog.capture("report_viewed", { registration: reg });
+
     // First try sessionStorage (from homepage navigation)
     const stored = sessionStorage.getItem(`report:${reg}`);
     if (stored) {

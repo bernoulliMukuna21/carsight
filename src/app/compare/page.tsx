@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import type { ComparisonReport, VehicleReport, RecommendationStatus } from "@/core/domain/types";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { CautionFlagList } from "@/components/CautionFlagList";
@@ -37,17 +38,24 @@ const STATUS_LABEL: Record<RecommendationStatus, string> = {
 
 export default function ComparePage() {
   const router = useRouter();
+  const posthog = usePostHog();
   const [comparison, setComparison] = useState<ComparisonReport | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("comparison");
     if (stored) {
-      setComparison(JSON.parse(stored));
+      const data = JSON.parse(stored);
+      setComparison(data);
+      posthog.capture("comparison_viewed", {
+        vehicle_count: data.ranked?.length ?? 0,
+        top_pick: data.recommendation?.registration,
+        top_pick_status: data.recommendation?.status,
+      });
     } else {
       router.push("/");
     }
-  }, [router]);
+  }, [router, posthog]);
 
   if (!comparison) return null;
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import {
   cleanCarReg,
   repeatAdvisoryReg,
@@ -12,6 +13,7 @@ import { RegTagInput } from "@/components/RegTagInput";
 
 export default function HomePage() {
   const router = useRouter();
+  const posthog = usePostHog();
   const [regs, setRegs] = useState<string[]>(() => {
     if (typeof window === "undefined") return [];
     try {
@@ -34,6 +36,10 @@ export default function HomePage() {
     }
 
     setLoading(true);
+    posthog.capture("search_submitted", {
+      reg_count: regs.length,
+      mode: regs.length === 1 ? "single" : "compare",
+    });
 
     try {
       const res = await fetch("/api/lookup", {

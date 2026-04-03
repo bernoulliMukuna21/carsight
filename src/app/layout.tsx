@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 export const metadata: Metadata = {
   title: "CarSight — Find the best car in your shortlist",
@@ -15,7 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-gray-50 dark:bg-slate-900" suppressHydrationWarning>
-        <header className="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <PostHogProvider>
+          <header className="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
           <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-2">
             <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
@@ -41,6 +43,7 @@ export default function RootLayout({
             <p className="mt-2">&copy; 2026 CarSight. All rights reserved.</p>
           </div>
         </footer>
+        </PostHogProvider>
       </body>
     </html>
   );
