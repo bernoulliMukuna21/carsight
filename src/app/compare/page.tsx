@@ -198,7 +198,7 @@ function VehicleCard({
     <div
       className={`rounded-xl border bg-white dark:bg-slate-800 overflow-hidden transition-all ${
         isRecommended
-          ? vehicle.cautionFlags.length > 0
+          ? vehicle.cautionFlags.length > 0 || vehicle.score.band !== "Low"
             ? "border-amber-300 dark:border-amber-700 ring-2 ring-amber-200 dark:ring-amber-900"
             : "border-green-300 dark:border-green-700 ring-2 ring-green-200 dark:ring-green-900"
           : "border-gray-200 dark:border-slate-700"
@@ -231,7 +231,7 @@ function VehicleCard({
           </p>
         </div>
         {isRecommended && (() => {
-          return vehicle.cautionFlags.length > 0 ? (
+          return vehicle.cautionFlags.length > 0 || vehicle.score.band !== "Low" ? (
             <span className="text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 px-2 py-0.5 rounded-full shrink-0">
               Best available
             </span>
