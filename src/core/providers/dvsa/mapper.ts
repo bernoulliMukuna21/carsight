@@ -16,11 +16,11 @@ function mapDefect(defect: DvsaDefect): MotIssue {
 }
 
 export function mapDvsaResponse(raw: DvsaVehicleResponse): MotTest[] {
-  return raw.motTests.map((test) => ({
+  return (raw.motTests ?? []).map((test) => ({
     date: test.completedDate.split("T")[0], // normalise to YYYY-MM-DD
     result: test.testResult === "PASSED" ? "PASS" : "FAIL",
     mileage:
       test.odometerValue != null ? parseInt(test.odometerValue, 10) : null,
-    issues: test.defects.map(mapDefect),
+    issues: (test.defects ?? []).map(mapDefect),
   }));
 }

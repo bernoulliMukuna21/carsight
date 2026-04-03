@@ -63,7 +63,7 @@ async function buildVehicleReport(
         band: "Low",
       },
       cautionFlags: [],
-      error: `No MOT history found for ${registration}. Check the registration is correct.`,
+      error: `No MOT history found for ${registration}. The vehicle may be too new to require an MOT, or the registration may be incorrect.`,
     };
   }
 
