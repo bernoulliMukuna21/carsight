@@ -69,6 +69,25 @@ async function buildVehicleReport(
 
   const tests = mapDvsaResponse(dvsaData);
 
+  if (tests.length === 0) {
+    return {
+      registration,
+      tests: [],
+      classifiedIssues: [],
+      score: {
+        severity: 0,
+        repetition: 0,
+        safety: 0,
+        maintenance: 0,
+        mileage: 0,
+        total: 0,
+        band: "Low",
+      },
+      cautionFlags: [],
+      error: `No MOT history found for ${registration}. The vehicle may be too new to require an MOT.`,
+    };
+  }
+
   // DVLA is supplementary — failure doesn't break the report
   const dvlaData =
     dvlaResult.status === "fulfilled" ? dvlaResult.value : null;
